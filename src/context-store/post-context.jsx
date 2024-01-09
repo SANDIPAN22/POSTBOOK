@@ -1,9 +1,9 @@
 import { createContext} from "react";
 
 export const postListContext =  createContext({
-    currentPosts: [],
-    createPost: ()=> {},
-    deletePost: ()=> {}
+    latestPosts: [],
+    handleCreatePost: ()=> {},
+    handleDeletePost: ()=> {}
 })
 
 const [latestPosts, postDispatch] = useReducer(postReducer, [])
@@ -22,9 +22,9 @@ const handleDeletePost = () => {
 
 export const PostListProvider = ({children}) => {
     return <postListContext.Provider value={{
-        currentPosts: latestPosts,
-        createPost: handleCreatePost,
-        deletePost: handleDeletePost
+        currentPosts,
+        createPost,
+        deletePost
     }}>
         {children}
     </postListContext.Provider>
