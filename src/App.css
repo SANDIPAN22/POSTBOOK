@@ -11,3 +11,29 @@
   min-height: 720px;
 
 }
+.postbook-post-card{
+  margin: 35px 20px;
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.356);
+  width: 90%;
+}
+
+.postbook-post-tags{
+  margin: 5px;
+  float: right;
+}
+
+.inline-div{
+  display: inline;
+}
+
+.post-author-credit{
+  float: right;
+  opacity: 30%;
+}
+
+.postbook-create-post{
+  margin: 20px;
+  box-shadow: 5px 5px 5px black;
+  border: 1px solid rgba(0, 0, 0, 0.16);
+  padding: 10px;
+}

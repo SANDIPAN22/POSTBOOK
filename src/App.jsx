@@ -8,7 +8,7 @@ import CreatePost from './components/CreatePost'
 import PostList from './components/PostList'
 import postReducer from './reducer-functions/post-reducer-func'
 import {PostListProvider} from './context-store/post-context'
-import { useReducer, useState } from 'react'
+import { useState } from 'react'
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('home')
@@ -21,7 +21,7 @@ const App = () => {
   <div className="block-container">
   <Navbar/>
 
-  {selectedTab === 'home' ? <PostList /> : <CreatePost/>}
+  {selectedTab === 'home' ? <PostList /> : <CreatePost setSelectedTab={setSelectedTab}/>}
 
   <Footer/>
   </div>

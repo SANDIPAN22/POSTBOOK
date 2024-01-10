@@ -1,21 +1,50 @@
-const CreatePost = () => {
+import { useRef, useContext } from "react"
+import {postListContext} from "../context-store/post-context"
+
+const CreatePost = ({setSelectedTab}) => {
+  const {handleCreatePost} = useContext(postListContext)
+  const titleRef = useRef()
+  const bodyRef = useRef()
+  const tagRef = useRef()
+  const formSubmitter = () => {
+    
+    const newTitle = titleRef.current.value 
+    const newBody = bodyRef.current.value
+    const newTags = tagRef.current.value
+    if (!newTitle || !newBody){
+      alert(`Data missing at  ${newBody ? titleRef.current.name : bodyRef.current.name}`)
+    }
+    else{
+      handleCreatePost({
+        title: newTitle,
+        body: newBody,
+        tags: newTags
+      })
+      alert("You latest Post is now published !!!!")
+      setSelectedTab('home')
+    }
+  }
+
     return <>
-    <form>
+    <div className="postbook-create-post">
   <div className="mb-3">
-    <label htmlFor="exampleInputEmail1" className="form-label">Email address</label>
-    <input type="email" className="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"/>
-    <div id="emailHelp" className="form-text">We'll never share your email with anyone else.</div>
+    <label  className="form-label">Title</label>
+    <input type="text" className="form-control" ref={titleRef} name="Title"/>
+    
   </div>
   <div className="mb-3">
-    <label htmlFor="exampleInputPassword1" className="form-label">Password</label>
-    <input type="password" className="form-control" id="exampleInputPassword1"/>
+    <label  className="form-label">Content</label>
+    <input type="text" className="form-control" ref={bodyRef} name="Content"/>
+    
   </div>
-  <div className="mb-3 form-check">
-    <input type="checkbox" className="form-check-input" id="exampleCheck1"/>
-    <label className="form-check-label" htmlFor="exampleCheck1">Check me out</label>
+  <div className="mb-3">
+    <label  className="form-label">Tags</label>
+    <input type="text" className="form-control" ref={tagRef} name="Tags"/>
+    
   </div>
-  <button type="submit" className="btn btn-primary">Submit</button>
-</form>
+  
+  <button type="button" className="btn btn-primary" onClick={formSubmitter}>Create</button>
+</div>
     
     </>
 }
