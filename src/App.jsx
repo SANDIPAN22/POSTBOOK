@@ -12,16 +12,16 @@ import { useState } from 'react'
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('home')
-  
+  const [selectedKeywords, setSelectedKeywords] = useState([])
   
   return <>
   <PostListProvider>
   <div className="flex-container">
   <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
   <div className="block-container">
-  <Navbar/>
+  <Navbar selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords}/>
 
-  {selectedTab === 'home' ? <PostList /> : <CreatePost setSelectedTab={setSelectedTab}/>}
+  {selectedTab === 'home' ? <PostList selectedKeywords={selectedKeywords} /> : <CreatePost setSelectedTab={setSelectedTab}/>}
 
   <Footer/>
   </div>

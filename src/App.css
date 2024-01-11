@@ -22,6 +22,12 @@
   float: right;
 }
 
+.postbook-filter-tags{
+  margin-left: 25px;
+  margin-top: 8px;
+  border-radius: 20px;
+}
+
 .inline-div{
   display: inline;
 }
