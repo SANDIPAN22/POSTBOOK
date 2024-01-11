@@ -9,11 +9,18 @@ import PostList from './components/PostList'
 import postReducer from './reducer-functions/post-reducer-func'
 import {PostListProvider} from './context-store/post-context'
 import { useState } from 'react'
+import EditPost from './components/EditPost'
 
 const App = () => {
   const [selectedTab, setSelectedTab] = useState('home')
   const [selectedKeywords, setSelectedKeywords] = useState([])
-  
+  const [editPostId, setEditPostId] = useState([])
+
+  const onEditPostClick = (postId) => {
+    setSelectedTab('edit_post')
+    setEditPostId(postId)
+  }
+
   return <>
   <PostListProvider>
   <div className="flex-container">
@@ -21,8 +28,10 @@ const App = () => {
   <div className="block-container">
   <Navbar selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords}/>
 
-  {selectedTab === 'home' ? <PostList selectedKeywords={selectedKeywords} /> : <CreatePost setSelectedTab={setSelectedTab}/>}
-
+  {selectedTab === 'home' &&  <PostList selectedKeywords={selectedKeywords} onEditPostClick={onEditPostClick}/> }
+  {selectedTab === 'create_post' &&  <CreatePost setSelectedTab={setSelectedTab}/> }
+  {selectedTab === 'edit_post' &&  <EditPost setSelectedTab={setSelectedTab} editPostId={editPostId}/> }
+  
   <Footer/>
   </div>
   </div>

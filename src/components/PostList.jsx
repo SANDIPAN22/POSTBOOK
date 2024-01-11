@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import Post from './Post'
 import {postListContext} from '../context-store/post-context'
 
-const PostList = ({selectedKeywords}) => {
+const PostList = ({selectedKeywords, onEditPostClick}) => {
     const {latestPosts} = useContext(postListContext)
    
     const revLatestPosts = [...latestPosts].reverse()
@@ -25,7 +25,7 @@ const PostList = ({selectedKeywords}) => {
     }
     
     return <>
-    {FinalPostList.map((item) => <Post key={item.id} item={item}/>)}
+    {FinalPostList.map((item) => <Post key={item.id} onEditPostClick={onEditPostClick} item={item}/>)}
 
     </>
 }

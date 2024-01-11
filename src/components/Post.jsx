@@ -1,8 +1,9 @@
 import { useContext } from "react";
 import {postListContext} from "../context-store/post-context"
 import { AiTwotoneDelete } from "react-icons/ai";
+import { FaPenClip } from "react-icons/fa6";
 
-const Post = ({item}) => {
+const Post = ({item, onEditPostClick}) => {
   const {handleDeletePost, handleIncLike} = useContext(postListContext)
     return <>
     <div className="card postbook-post-card" >
@@ -11,7 +12,11 @@ const Post = ({item}) => {
     
     <h5 className="card-title inline-div" >{item.title} <span className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
     <AiTwotoneDelete onClick={()=> handleDeletePost(item.id)}/>
-    </span></h5> 
+    </span>
+    <span className="position-absolute top-0 start-0 translate-middle badge rounded-pill bg-success">
+    <FaPenClip onClick={()=> onEditPostClick(item.id)}/>
+    </span>
+    </h5> 
     {item.tags.map(tag => <span className="badge rounded-pill bg-info text-dark postbook-post-tags">#{tag}</span>)}
     <hr />
 

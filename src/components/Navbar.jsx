@@ -1,9 +1,8 @@
-import {useContext, useRef} from 'react'
-import {postListContext} from "../context-store/post-context"
+import {useRef} from 'react'
 import { RxCross1 } from "react-icons/rx";
 
 const Navbar = ({selectedKeywords, setSelectedKeywords}) => {
-  console.log(selectedKeywords)
+  // console.log(selectedKeywords)
   const searchRef = useRef()
 
 
@@ -56,9 +55,9 @@ return <>
         <button className="btn btn-outline-success" onClick={handleSearchApply} type="submit">Apply</button>
       </div>
       {selectedKeywords.map((elem, i) => 
-       <span class="btn btn-warning position-relative postbook-filter-tags">
+       <span className="btn btn-warning position-relative postbook-filter-tags">
        {elem}
-       <button type="button" onClick={()=> handleDeleteKeyword(i)} class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+       <button type="button" onClick={()=> handleDeleteKeyword(i)} className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
        <RxCross1 />
        </button>
      </span>

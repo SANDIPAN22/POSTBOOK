@@ -20,6 +20,12 @@ return <>
           Create Post
         </a>
       </li>
+      {selectedTab === 'edit_post' && <li>
+        <a href="#" className={`nav-link ${selectedTab === 'edit_post' && "active"}`} >
+          <svg className="bi me-2" width="16" height="16"><use xlinkHref="#speedometer2"></use></svg>
+          Edit Post
+        </a>
+      </li>}
      
     </ul>
     {/* <hr/> */}

@@ -6,7 +6,7 @@ const DEFAULT_POSTLIST = [
     {
         id : 'post' + (new Date()).getTime(),
         title: 'Going to Manali',
-        body: 'Hey guys, going to manali trip. Hope to see SNOW....',
+        body: 'Hey guys, going to manali trip. Hope to see SNOW.... (This is a default post)',
         reactions: 52,
         author: 'author1',
         tags: ['fun', 'trip', 'weekend'],
@@ -14,11 +14,11 @@ const DEFAULT_POSTLIST = [
     },
     {
         id : 'post' + (new Date()).getTime()+1,
-        title: 'Started practicing DSA',
-        body: 'Hey fellow SDEs, Recently started working on DSA. Support me !!',
+        title: 'Postbook - A React Project',
+        body: 'Hey fellow SDEs, This is a React based frontend project. Here you can Create a new post, delete a post, filter the List of Post and finally you can edit an existing post also. Hope you have enjoyed this project. Please Like the post ... (This is a default post)',
         reactions: 145,
         author: 'author2',
-        tags: ['coding', 'dsa', 'sde'],
+        tags: ['coding', 'react', 'sde', 'dev'],
         dateTime: String(new Date())
     }
 
@@ -53,12 +53,16 @@ export const PostListProvider = ({children}) => {
         }})
     }
 
+    const handleUpdatePost = (formObj) => {
+        postDispatch({type: "UPDATE_POST", payload: formObj})
+    }
     
     return <postListContext.Provider value={{
         latestPosts,
         handleCreatePost,
         handleDeletePost,
-        handleIncLike
+        handleIncLike,
+        handleUpdatePost
     }}>
         {children}
     </postListContext.Provider>

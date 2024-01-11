@@ -15,6 +15,15 @@ const postReducer = (initialState, action) => {
       const ind = newObjArr.findIndex((post) => post.id === action.payload.id);
       newObjArr[ind].reactions++;
       return newObjArr;
+
+    case "UPDATE_POST":
+      newObjArr = [...initialState];
+
+      newObjArr[action.payload.postInd].title = action.payload.title;
+      newObjArr[action.payload.postInd].body = action.payload.body;
+      newObjArr[action.payload.postInd].tags = action.payload.tags.split(",");
+
+      return newObjArr;
   }
 };
 
