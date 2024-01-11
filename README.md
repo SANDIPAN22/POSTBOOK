@@ -1,8 +1,11 @@
-# React + Vite
+# Postbook - A react based frontend project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A minimalistic frontend social media like App. It is created using Vite, React, Bootstrap 5. It has no backend connection.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- You can Create a post.
+- All posts can be seen in sorted order based on its creation time.
+- A post can be deleted.
+- A post can be edited.
+- You can give reactions in a post (real time reaction count is visible)
