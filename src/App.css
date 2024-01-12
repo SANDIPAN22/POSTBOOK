@@ -43,3 +43,16 @@
   border: 1px solid rgba(0, 0, 0, 0.16);
   padding: 10px;
 }
+
+.postbook-no-post-banner{
+  margin: 20px;
+  text-align: center;
+  font-size: x-large;
+  opacity: 40%;
+}
+
+.postbook-body-loader{
+  margin: 50px;
+  width: 250px;
+  
+}

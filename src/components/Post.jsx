@@ -17,7 +17,7 @@ const Post = ({item, onEditPostClick}) => {
     <FaPenClip onClick={()=> onEditPostClick(item.id)}/>
     </span>
     </h5> 
-    {item.tags.map(tag => <span className="badge rounded-pill bg-info text-dark postbook-post-tags">#{tag}</span>)}
+    {item.tags.map((tag, i) => tag !== '' && <span key={i} className="badge rounded-pill bg-info text-dark postbook-post-tags">#{tag}</span>)}
     <hr />
 
     <p className="card-text">{item.body}</p>
@@ -25,7 +25,7 @@ const Post = ({item, onEditPostClick}) => {
     <button type="button" className="btn btn-primary inline-div" onClick={()=> handleIncLike(item.id)}>
       Like <span className="badge bg-danger" >{item.reactions}</span>
     </button>
-    <div className="post-author-credit">By {item.author} at {item.dateTime}</div>
+    <div className="post-author-credit">By author{item.userId}</div>
   </div>
 </div>
     </>

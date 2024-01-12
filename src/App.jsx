@@ -26,7 +26,7 @@ const App = () => {
   <div className="flex-container">
   <Sidebar selectedTab={selectedTab} setSelectedTab={setSelectedTab}/>
   <div className="block-container">
-  <Navbar selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords}/>
+  <Navbar selectedKeywords={selectedKeywords} setSelectedKeywords={setSelectedKeywords} selectedTab={selectedTab}/>
 
   {selectedTab === 'home' &&  <PostList selectedKeywords={selectedKeywords} onEditPostClick={onEditPostClick}/> }
   {selectedTab === 'create_post' &&  <CreatePost setSelectedTab={setSelectedTab}/> }

@@ -24,6 +24,10 @@ const postReducer = (initialState, action) => {
       newObjArr[action.payload.postInd].tags = action.payload.tags.split(",");
 
       return newObjArr;
+
+    case "CREATE_BATCH_POSTS":
+      newObjArr = [...initialState, ...action.payload];
+      return newObjArr;
   }
 };
 

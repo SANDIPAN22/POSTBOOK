@@ -1,44 +1,49 @@
-import { createContext, useReducer} from "react";
+import { createContext, useReducer, useEffect, useState} from "react";
 import postReducer from "../reducer-functions/post-reducer-func";
+import { RxUpdate } from "react-icons/rx";
 
 export const postListContext =  createContext()
-const DEFAULT_POSTLIST = [
-    {
-        id : 'post' + (new Date()).getTime(),
-        title: 'Going to Manali',
-        body: 'Hey guys, going to manali trip. Hope to see SNOW.... (This is a default post)',
-        reactions: 52,
-        author: 'author1',
-        tags: ['fun', 'trip', 'weekend'],
-        dateTime: String(new Date())
-    },
-    {
-        id : 'post' + (new Date()).getTime()+1,
-        title: 'Postbook - A React Project',
-        body: 'Hey fellow SDEs, This is a React based frontend project. Here you can Create a new post, delete a post, filter the List of Post and finally you can edit an existing post also. Hope you have enjoyed this project. Please Like the post ... (This is a default post)',
-        reactions: 145,
-        author: 'author2',
-        tags: ['coding', 'react', 'sde', 'dev'],
-        dateTime: String(new Date())
-    }
-
-]
-
-
-
-
 
 export const PostListProvider = ({children}) => {
-    const [latestPosts, postDispatch] = useReducer(postReducer, DEFAULT_POSTLIST)
-    
+    const [latestPosts, postDispatch] = useReducer(postReducer, [])
+    // for loading sign feature
+    const [fetching, setFetcher] = useState(false)
+
+     // use effect hook to call the from the dummy server (we are keeping thid useEffect here to fetch
+    //  the data only once when then app starts and hold the data through out untill next refresh. Hence any
+    //   create, update, 
+    //  delete operations results will show in screen.
+    //   This is done Only for this backend-less project, otherwise fetching should be done inside where 
+    //   it is gettibg rendered, 
+    //   so FaThumbtack, fetch opertaion only happens when it is about to rendered, fetch connection stops when that component 
+    //   is not visible)
+    useEffect(()=>{
+        const controller = new AbortController()
+        const signal = controller.signal
+
+        setFetcher(true)
+        fetch('https://dummyjson.com/posts', {signal})
+        .then(res => res.json())
+        .then(json => {
+            console.log(json.posts)
+            handleCreateBatchPosts(json.posts)
+            setFetcher(false)
+        })
+
+        // useEffect Hook CleanUp
+        return () => {
+            console.log("DROPPING THE SERVER Connection, AS YOU HAVE NO INTEREST..in POST LIST..")
+            controller.abort();
+        }
+
+    }, [])
     const handleCreatePost = (formObj) => {
         postDispatch({type: 'NEW_POST', payload: {
             id: 'post' + (new Date()).getTime(),
             title: formObj.title,
             body: formObj.body,
-            author: 'author' + (new Date()).getTime(),
+            userId: (new Date()).getTime(),
             tags: formObj.tags.split(','),
-            dateTime: String(new Date()),
             reactions: 0
         }})
     }
@@ -56,13 +61,20 @@ export const PostListProvider = ({children}) => {
     const handleUpdatePost = (formObj) => {
         postDispatch({type: "UPDATE_POST", payload: formObj})
     }
+
+    const handleCreateBatchPosts = (posts) => {
+        postDispatch({type: "CREATE_BATCH_POSTS", payload: posts})
+    }
+
+    
     
     return <postListContext.Provider value={{
         latestPosts,
         handleCreatePost,
         handleDeletePost,
         handleIncLike,
-        handleUpdatePost
+        handleUpdatePost,
+        fetching
     }}>
         {children}
     </postListContext.Provider>
